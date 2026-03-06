@@ -1,0 +1,22 @@
+.app-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card {
+  margin-bottom: 15px;
+}
+
+.expense-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
