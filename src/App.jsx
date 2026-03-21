@@ -3,9 +3,10 @@ import ExpenseForm from "./components/ExpenseForm";
 import ExpenseFilters from "./components/ExpenseFilters";
 import ExpenseList from "./components/ExpenseList";
 import ExpenseChart from "./components/ExpenseChart";
-
+import Sort from "./components/Sort";
+import SortedChart from "./components/SortedChart";
 function App() {
-
+const [sortType, setSortType] = useState("");
   const [expenses, setExpenses] = useState(() => {
     const saved = localStorage.getItem("expenses");
     return saved ? JSON.parse(saved) : [];
@@ -29,6 +30,11 @@ function App() {
     filter === "All"
       ? expenses
       : expenses.filter((e) => e.category === filter);
+      const sortedExpenses = [...filteredExpenses].sort((a, b) => {
+  if (sortType === "high") return b.amount - a.amount;
+  if (sortType === "low") return a.amount - b.amount;
+  return 0;
+});
 
   return (
     <div className="container">
@@ -39,10 +45,13 @@ function App() {
       <ExpenseForm addExpense={addExpense} />
 
       <ExpenseFilters filter={filter} setFilter={setFilter} />
+      <Sort setSortType={setSortType} /> 
 
-      <ExpenseList expenses={filteredExpenses} deleteExpense={deleteExpense} />
+      <ExpenseList expenses={sortedExpenses} deleteExpense={deleteExpense} />
+<ExpenseChart expenses={sortedExpenses} />
+<SortedChart expenses={sortedExpenses} /> 
 
-      <ExpenseChart expenses={filteredExpenses} />
+      
 
     </div>
   );

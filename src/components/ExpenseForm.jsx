@@ -10,7 +10,7 @@ function ExpenseForm({ addExpense }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    addExpense({ amount, category, date, note });
+addExpense({ amount: Number(amount), category, date, note });
 
     setAmount("");
     setDate("");
